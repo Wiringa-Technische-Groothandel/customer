@@ -1,0 +1,19 @@
+{
+    "name": "wtg/customer",
+    "description": "Customer module for WTG/webshop",
+    "authors": [
+        {
+            "name": "Thomas Wiringa",
+            "email": "thomas.wiringa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "WTG\\Customer\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0",
+        "illuminate/support": "5.4.*"
+    }
+}
