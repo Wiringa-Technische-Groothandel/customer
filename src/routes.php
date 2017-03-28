@@ -1,17 +1,25 @@
 <?php
 
 Route::group([
-    'middleware' => ['web', 'auth'],
+    'middleware' => ['web'],
     'as' => 'customer::',
     'prefix' => 'customer',
     'namespace' => 'WTG\Customer\Controllers'
 ], function () {
     Route::group([
-        'as' => 'account.'
+        'as' => 'auth.',
+        'prefix' => 'auth',
+        'namespace' => 'Auth'
     ], function () {
-        Route::get('/', 'DashboardController@view')->name('dashboard');
+        Route::post('login', 'LoginController@login')->name('login');
+    });
 
-        Route::get('accounts', 'SubAccountController@view')->name('accounts');
+    Route::group([
+        'as' => 'account.',
+        'prefix' => 'account',
+        'namespace' => 'Account',
+        'middleware' => ['auth']
+    ], function () {
         Route::group([
             'prefix' => 'accounts',
             'as' => 'accounts::'
@@ -21,10 +29,8 @@ Route::group([
             Route::post('remove', 'SubAccountController@destroy')->name('delete');
         });
 
-        Route::get('password', 'PasswordController@view')->name('password');
         Route::post('password', 'PasswordController@doChangePassword');
 
-        Route::get('favorites', 'FavoritesController@view')->name('favorites');
         Route::group([
             'prefix' => 'favorites',
             'as' => 'favorites::'
@@ -34,7 +40,6 @@ Route::group([
             Route::post('delete', 'FavoritesController@delete')->name('delete');
         });
 
-        Route::get('history', 'OrderHistoryController@view')->name('history');
         Route::group([
             'prefix' => 'history',
             'as' => 'history::'
@@ -42,7 +47,6 @@ Route::group([
             Route::get('{order}', 'OrderHistoryController@addOrderToCart')->name('reorder');
         });
 
-        Route::get('addresses', 'AddressController@view')->name('addresses');
         Route::group([
             'prefix' => 'addresses',
             'as' => 'addresses::'
@@ -51,7 +55,6 @@ Route::group([
             Route::post('delete/{id}', 'AddressController@delete')->name('delete');
         });
 
-        Route::get('discountfile', 'DiscountfileController@view')->name('discountfile');
         Route::group([
             'prefix' => 'discountfile',
             'as' => 'discountfile::'

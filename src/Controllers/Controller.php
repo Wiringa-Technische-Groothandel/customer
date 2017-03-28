@@ -2,17 +2,16 @@
 
 namespace WTG\Customer\Controllers;
 
-use App\Http\Controllers\Controller as BaseController;
+use Illuminate\Routing\Controller as BaseController;
 
 /**
  * Class Controller.
  *
- * @author  Thomas Wiringa <thomas.wiringa@gmail.com>
+ * @package     WTG\Customer
+ * @subpackage  Controllers
+ * @author      Thomas Wiringa <thomas.wiringa@gmail.com>
  */
 abstract class Controller extends BaseController
 {
-    /**
-     * @return \Illuminate\View\View
-     */
-    abstract public function view();
+    //
 }

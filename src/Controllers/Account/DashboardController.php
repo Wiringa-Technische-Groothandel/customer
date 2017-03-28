@@ -1,6 +1,8 @@
 <?php
 
-namespace WTG\Customer\Controllers;
+namespace WTG\Customer\Controllers\Account;
+
+use WTG\Customer\Controllers\Controller;
 
 /**
  * Class DashboardController

@@ -1,8 +1,9 @@
 <?php
 
-namespace WTG\Customer\Controllers;
+namespace WTG\Customer\Controllers\Account;
 
 use Illuminate\Http\Request;
+use WTG\Customer\Controllers\Controller;
 
 /**
  * Class PasswordController.

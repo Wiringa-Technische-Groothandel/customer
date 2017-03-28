@@ -1,11 +1,12 @@
 <?php
 
-namespace WTG\Customer\Controllers;
+namespace WTG\Customer\Controllers\Account;
 
 use Auth;
-use Response;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use WTG\Customer\Controllers\Controller;
 
 /**
  * Class SubAccountController.

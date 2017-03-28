@@ -1,11 +1,11 @@
 <?php
 
-namespace WTG\Customer\Controllers;
+namespace WTG\Customer\Controllers\Account;
 
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use WTG\Customer\Controllers\Controller;
 
 /**
  * Class OrderHistoryController
