@@ -37,13 +37,13 @@ class LoginController extends Controller
             return $this->failedAuthentication();
         }
 
-        $loggedIn = \Auth::attempt([
+        $login_data = [
             'company_id' => $company->getId(),
             'username' => $request->input('username'),
             'password' => $request->input('password')
-        ], $request->input('remember'));
+        ];
 
-        if (!$loggedIn) {
+        if (!$this->attemptLogin($login_data, $request->input('remember', false))) {
             return $this->failedAuthentication();
         }
 
@@ -74,7 +74,19 @@ class LoginController extends Controller
         \Log::info("[Login] Customer '".request('company')."' - '".request('username')."' has logged in");
 
         return redirect()
-            ->intended()
+            ->intended(url()->previous())
             ->with('status', __('customer::auth.login_success', ['company' => $company->getName()]));
+    }
+
+    /**
+     * Attempt the login
+     *
+     * @param  array  $data
+     * @param  bool  $remember
+     * @return bool
+     */
+    protected function attemptLogin(array $data, bool $remember = false)
+    {
+        return \Auth::attempt($data, $remember);
     }
 }

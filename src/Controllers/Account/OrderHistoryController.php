@@ -2,9 +2,9 @@
 
 namespace WTG\Customer\Controllers\Account;
 
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use WTG\Checkout\Models\Order;
 use WTG\Customer\Controllers\Controller;
 
 /**
@@ -14,21 +14,6 @@ use WTG\Customer\Controllers\Controller;
  */
 class OrderHistoryController extends Controller
 {
-    /**
-     * Order history
-     *
-     * @return \Illuminate\View\View
-     */
-    public function view()
-    {
-        $orders = Order::with('products')
-            ->where('User_id', Auth::user()->company_id)
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
-
-        return view('account.orderhistory.index', compact('orders'));
-    }
-
     /**
      * Add the items from a previous order to the cart again
      *

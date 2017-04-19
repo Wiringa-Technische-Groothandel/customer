@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use WTG\Customer\Interfaces\CompanyInterface;
 
 /**
- * Customer model
+ * Company model
  *
  * @package     WTG\Customer
  * @subpackage  Models
@@ -100,6 +100,29 @@ class Company extends Model implements CompanyInterface
     public function getActive(): bool
     {
         return $this->attributes['active'];
+    }
+
+    /**
+     * Set the company's admin state
+     *
+     * @param  bool  $admin
+     * @return $this
+     */
+    public function setIsAdmin(bool $admin)
+    {
+        $this->attributes['is_admin'] = $admin;
+
+        return $this;
+    }
+
+    /**
+     * Check if the company is admin
+     *
+     * @return bool
+     */
+    public function getIsAdmin(): bool
+    {
+        return $this->attributes['is_admin'];
     }
 
     /**

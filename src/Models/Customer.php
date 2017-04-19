@@ -3,6 +3,7 @@
 namespace WTG\Customer\Models;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use WTG\Customer\Interfaces\CustomerInterface;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -87,6 +88,16 @@ class Customer extends Model implements AuthenticatableContract,
     }
 
     /**
+     * Get the company id
+     *
+     * @return string
+     */
+    public function getCompanyId(): string
+    {
+        return $this->attributes['company_id'];
+    }
+
+    /**
      * Set the username
      *
      * @param  string  $username
@@ -110,7 +121,7 @@ class Customer extends Model implements AuthenticatableContract,
     }
 
     /**
-     * Set the username
+     * Set the password
      *
      * @param  string  $password
      * @return $this
@@ -199,5 +210,54 @@ class Customer extends Model implements AuthenticatableContract,
     public function getManager(): bool
     {
         return $this->attributes['manager'];
+    }
+
+    /**
+     * Check if the customer has admin rights
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        $company = $this->getCompany();
+
+        if ($company !== null) {
+            return $company->getIsAdmin();
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if this model is the current user.
+     *
+     * @return bool
+     */
+    public function isCurrent(): bool
+    {
+        return Auth::user()->getUsername() === $this->getUsername();
+    }
+
+    /**
+     * Get is main
+     *
+     * @return bool
+     */
+    public function getIsMain(): bool
+    {
+        return $this->attributes['is_main'];
+    }
+
+    /**
+     * Set is main
+     *
+     * @param  bool  $isMain
+     * @return $this
+     */
+    public function setIsMain(bool $isMain)
+    {
+        $this->attributes['is_main'] = $isMain;
+
+        return $this;
     }
 }

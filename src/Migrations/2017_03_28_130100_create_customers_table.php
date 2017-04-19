@@ -18,8 +18,9 @@ class CreateCustomersTable extends Migration
             $table->string('username', 20)->unique();
             $table->string('password');
             $table->string('email', 100);
-            $table->boolean('active');
+            $table->boolean('active')->default(false);
             $table->boolean('manager')->default(false);
+            $table->boolean('is_main')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

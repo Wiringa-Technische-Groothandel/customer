@@ -44,6 +44,13 @@ interface CustomerInterface
     public function setCompanyId(string $companyId);
 
     /**
+     * Get the company id
+     *
+     * @return string
+     */
+    public function getCompanyId(): string;
+
+    /**
      * Set the username
      *
      * @param  string  $username
@@ -117,4 +124,32 @@ interface CustomerInterface
      * @return bool
      */
     public function getManager(): bool;
+
+    /**
+     * Check if the customer has admin rights
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool;
+
+    /**
+     * Check if this model is the current user.
+     *
+     * @return bool
+     */
+    public function isCurrent(): bool;
+
+    /**
+     * Get is main
+     *
+     * @return bool
+     */
+    public function getIsMain(): bool;
+    /**
+     * Set is main
+     *
+     * @param  bool  $isMain
+     * @return $this
+     */
+    public function setIsMain(bool $isMain);
 }

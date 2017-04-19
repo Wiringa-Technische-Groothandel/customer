@@ -31,6 +31,7 @@ class CustomersTableSeeder extends Seeder
         $customer->setEmail("test@test.com");
         $customer->setActive(true);
         $customer->setManager(true);
+        $customer->setIsMain(true);
         $customer->save();
     }
 }

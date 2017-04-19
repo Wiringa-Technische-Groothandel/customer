@@ -29,7 +29,12 @@ Route::group([
             Route::post('remove', 'SubAccountController@destroy')->name('delete');
         });
 
-        Route::post('password', 'PasswordController@doChangePassword');
+        Route::group([
+            'prefix' => 'password',
+            'as' => 'password::'
+        ], function () {
+            Route::post('/', 'PasswordController@doChangePassword')->name('update');
+        });
 
         Route::group([
             'prefix' => 'favorites',

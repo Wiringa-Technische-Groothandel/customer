@@ -17,6 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->string('customer_number')->unique();
             $table->string('name');
             $table->boolean('active');
+            $table->boolean('is_admin')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

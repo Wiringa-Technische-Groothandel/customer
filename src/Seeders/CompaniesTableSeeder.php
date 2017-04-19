@@ -27,6 +27,7 @@ class CompaniesTableSeeder extends Seeder
         $company->setCustomerNumber("12345");
         $company->setName("Test company");
         $company->setActive(true);
+        $company->setIsAdmin(true);
         $company->save();
     }
 }

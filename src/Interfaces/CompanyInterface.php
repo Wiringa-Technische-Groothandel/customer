@@ -59,6 +59,21 @@ interface CompanyInterface
     public function getActive(): bool;
 
     /**
+     * Set the company's admin state
+     *
+     * @param  bool  $admin
+     * @return $this
+     */
+    public function setIsAdmin(bool $admin);
+
+    /**
+     * Check if the company is admin
+     *
+     * @return bool
+     */
+    public function getIsAdmin(): bool;
+
+    /**
      * Set the customer number
      *
      * @param  string  $customerNumber
