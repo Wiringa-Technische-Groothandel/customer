@@ -3,8 +3,10 @@
 namespace WTG\Customer\Models;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use WTG\Customer\Interfaces\CompanyInterface;
 use WTG\Customer\Interfaces\CustomerInterface;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -32,13 +34,15 @@ class Customer extends Model implements AuthenticatableContract,
     public $incrementing = false;
 
     /**
-     * The company this customer belongs to
+     * Company scope
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @param  Builder  $query
+     * @param  string  $companyId
+     * @return Builder
      */
-    protected function company()
+    public function scopeCompany(Builder $query, string $companyId): Builder
     {
-        return $this->belongsTo(Company::class);
+        return $query->where('company_id', $companyId);
     }
 
     /**
@@ -71,7 +75,8 @@ class Customer extends Model implements AuthenticatableContract,
      */
     public function getCompany(): Company
     {
-        return $this->company;
+        return app()->make(CompanyInterface::class)
+            ->find($this->getCompanyId());
     }
 
     /**

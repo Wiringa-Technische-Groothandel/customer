@@ -1,7 +1,7 @@
 <?php
 
 Route::group([
-    'middleware' => ['web'],
+    'middleware' => ['web', 'ajax'],
     'as' => 'customer::',
     'prefix' => 'customer',
     'namespace' => 'WTG\Customer\Controllers'

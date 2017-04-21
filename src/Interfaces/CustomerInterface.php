@@ -2,6 +2,7 @@
 
 namespace WTG\Customer\Interfaces;
 
+use Illuminate\Database\Eloquent\Builder;
 use WTG\Customer\Models\Company;
 
 /**
@@ -13,6 +14,15 @@ use WTG\Customer\Models\Company;
  */
 interface CustomerInterface
 {
+    /**
+     * Company scope
+     *
+     * @param  Builder  $query
+     * @param  string  $companyId
+     * @return Builder
+     */
+    public function scopeCompany(Builder $query, string $companyId): Builder;
+
     /**
      * Set the id
      *

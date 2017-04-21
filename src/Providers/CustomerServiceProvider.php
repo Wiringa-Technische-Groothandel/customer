@@ -2,8 +2,19 @@
 
 namespace WTG\Customer\Providers;
 
+use WTG\Customer\Models\Company;
+use WTG\Customer\Models\Customer;
 use Illuminate\Support\ServiceProvider;
+use WTG\Customer\Interfaces\CompanyInterface;
+use WTG\Customer\Interfaces\CustomerInterface;
 
+/**
+ * Customer service provider
+ *
+ * @package     WTG\Customer
+ * @subpackage  Providers
+ * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
+ */
 class CustomerServiceProvider extends ServiceProvider
 {
     /**
@@ -27,6 +38,7 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CustomerInterface::class, Customer::class);
+        $this->app->bind(CompanyInterface::class, Company::class);
     }
 }

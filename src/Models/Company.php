@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use WTG\Customer\Interfaces\CompanyInterface;
+use WTG\Customer\Interfaces\CustomerInterface;
 
 /**
  * Company model
@@ -22,16 +23,6 @@ class Company extends Model implements CompanyInterface
      * @var bool
      */
     public $incrementing = false;
-
-    /**
-     * The customers that belong to this company
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    protected function customers()
-    {
-        return $this->hasMany(Customer::class);
-    }
 
     /**
      * Set the id
@@ -155,6 +146,8 @@ class Company extends Model implements CompanyInterface
      */
     public function getCustomers(): Collection
     {
-        return $this->customers;
+        return app()->make(CustomerInterface::class)
+            ->company($this->getId())
+            ->get();
     }
 }
