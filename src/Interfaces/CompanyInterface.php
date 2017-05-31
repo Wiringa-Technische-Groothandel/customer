@@ -94,4 +94,12 @@ interface CompanyInterface
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getCustomers(): Collection;
+
+    /**
+     * Get the created at date.
+     *
+     * @param  string|null  $format
+     * @return string
+     */
+    public function getCreatedAt($format = null): string;
 }

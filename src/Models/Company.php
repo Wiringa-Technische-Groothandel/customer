@@ -150,4 +150,15 @@ class Company extends Model implements CompanyInterface
             ->company($this->getId())
             ->get();
     }
+
+    /**
+     * Get the created at date.
+     *
+     * @param  string|null $format
+     * @return string
+     */
+    public function getCreatedAt($format = null): string
+    {
+        return $this->getAttribute('created_at')->format($format);
+    }
 }
