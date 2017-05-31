@@ -15,7 +15,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('company_id');
-            $table->string('username', 20)->unique();
+            $table->string('username', 20);
             $table->string('password');
             $table->string('email', 100);
             $table->boolean('active')->default(false);
