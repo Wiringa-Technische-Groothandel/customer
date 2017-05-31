@@ -1,10 +1,9 @@
 <?php
 
-namespace WTG\Customer\Controllers\Account;
+namespace WTG\Customer\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use WTG\Customer\Controllers\Controller;
 
 /**
  * Class DiscountfileController

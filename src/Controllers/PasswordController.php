@@ -1,9 +1,8 @@
 <?php
 
-namespace WTG\Customer\Controllers\Account;
+namespace WTG\Customer\Controllers;
 
 use Illuminate\Http\Request;
-use WTG\Customer\Controllers\Controller;
 
 /**
  * Password controller.
@@ -19,7 +18,7 @@ class PasswordController extends Controller
      */
     public function view()
     {
-        return view('account.password.index');
+        return view('customer::password.index');
     }
 
     /**

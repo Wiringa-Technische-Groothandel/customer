@@ -15,6 +15,10 @@ class AddCustomerForeignKeys1 extends Migration
         Schema::table('customers', function (Blueprint $table) {
             $table->foreign('company_id')->references('id')->on('companies');
         });
+
+        Schema::table('favorites', function (Blueprint $table) {
+            $table->foreign('customer_id')->references('id')->on('customers');
+        });
     }
 
     /**
@@ -24,6 +28,10 @@ class AddCustomerForeignKeys1 extends Migration
      */
     public function down()
     {
+        Schema::table('favorites', function (Blueprint $table) {
+            $table->dropForeign(['customer_id']);
+        });
+
         Schema::table('customers', function (Blueprint $table) {
             $table->dropForeign(['company_id']);
         });

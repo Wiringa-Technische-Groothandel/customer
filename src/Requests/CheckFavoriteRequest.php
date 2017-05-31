@@ -5,13 +5,13 @@ namespace WTG\Customer\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Login request
+ * Check favorite request
  *
- * @package     WTG\Checkout
+ * @package     WTG\Favorites
  * @subpackage  Requests
- * @author      Thomas Wiringa <thomas.wiringa@gmail.com>
+ * @author      Thomas Wiringa  <thomas.wiringa@gmail.com>
  */
-class LoginRequest extends FormRequest
+class CheckFavoriteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Auth::guest();
+        return \Auth::check();
     }
 
     /**
@@ -31,9 +31,7 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            "company" => 'required',
-            "username" => 'required',
-            "password" => 'required'
+            "product" => ['required', 'exists:products,id']
         ];
     }
 }

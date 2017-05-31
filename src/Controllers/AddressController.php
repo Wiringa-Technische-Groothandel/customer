@@ -1,10 +1,9 @@
 <?php
 
-namespace WTG\Customer\Controllers\Account;
+namespace WTG\Customer\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use WTG\Customer\Controllers\Controller;
 
 /**
  * Class AddressController
@@ -23,6 +22,13 @@ class AddressController extends Controller
         return view('account.addresses.index');
     }
 
+    /**
+     * Remove an address.
+     *
+     * @param Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function delete(Request $request, $id)
     {
         $address = Auth::user()->addresses()->findOrFail($id);

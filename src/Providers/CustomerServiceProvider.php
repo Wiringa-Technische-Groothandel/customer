@@ -3,10 +3,12 @@
 namespace WTG\Customer\Providers;
 
 use WTG\Customer\Models\Company;
+use WTG\Customer\Models\Favorite;
 use WTG\Customer\Models\Customer;
 use Illuminate\Support\ServiceProvider;
 use WTG\Customer\Interfaces\CompanyInterface;
 use WTG\Customer\Interfaces\CustomerInterface;
+use WTG\Customer\Interfaces\FavoriteInterface;
 
 /**
  * Customer service provider
@@ -24,6 +26,8 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'customer');
+
         $this->loadRoutesFrom(__DIR__.'/../routes.php');
 
         $this->loadMigrationsFrom(__DIR__.'/../Migrations');
@@ -38,6 +42,7 @@ class CustomerServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(FavoriteInterface::class, Favorite::class);
         $this->app->bind(CustomerInterface::class, Customer::class);
         $this->app->bind(CompanyInterface::class, Company::class);
     }

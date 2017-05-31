@@ -1,11 +1,10 @@
 <?php
 
-namespace WTG\Customer\Controllers\Account;
+namespace WTG\Customer\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use WTG\Checkout\Models\Order;
-use WTG\Customer\Controllers\Controller;
+use WTG\Checkout\Interfaces\OrderInterface;
 
 /**
  * Class OrderHistoryController
@@ -18,10 +17,10 @@ class OrderHistoryController extends Controller
      * Add the items from a previous order to the cart again
      *
      * @param  Request  $request
-     * @param  Order  $order
+     * @param  OrderInterface  $order
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function addOrderToCart(Request $request, Order $order)
+    public function addOrderToCart(Request $request, OrderInterface $order)
     {
         if ($order->User_id !== Auth::user()->company_id) {
             return redirect()->back();

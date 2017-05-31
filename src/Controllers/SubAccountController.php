@@ -1,12 +1,11 @@
 <?php
 
-namespace WTG\Customer\Controllers\Account;
+namespace WTG\Customer\Controllers;
 
 use Auth;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use WTG\Customer\Controllers\Controller;
+use WTG\Customer\Middleware\CheckManager;
 
 /**
  * Class SubAccountController.
@@ -15,9 +14,12 @@ use WTG\Customer\Controllers\Controller;
  */
 class SubAccountController extends Controller
 {
+    /**
+     * SubAccountController constructor.
+     */
     public function __construct()
     {
-        $this->middleware('manager');
+        $this->middleware(CheckManager::class);
     }
 
     /**
@@ -27,10 +29,12 @@ class SubAccountController extends Controller
      */
     public function view()
     {
-        return view('account.accounts.index', [
-            'accounts' => Auth::user()->subAccounts(),
-        ]);
+        $accounts = Auth::user()->getCompany()->getCustomers();
+
+        return view('customer::accounts.index', compact('accounts'));
     }
+
+    // TODO: Make the stuff below work
 
     /**
      * Store a newly created resource in storage.
